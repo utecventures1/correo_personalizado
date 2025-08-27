@@ -10,46 +10,38 @@ from email.mime.image import MIMEImage
 
 # --- CONFIGURACIÓN ---
 # ¡Completa estos datos!
-TU_CORREO = ""
+TU_CORREO = "dbazan@utec.edu.pe"
 CONTRASENA_APLICACION = ""  # ej: "abcd efgh ijkl mnop"
 ARCHIVO_EXCEL = 'correos.xlsx'
-ASUNTO_CORREO = "DEMO WEEK (correo prueba automatizado)"
+ASUNTO_CORREO = "Conoce DomusAI: Una plataforma para la gestión de edificios automatizada con IA"
+COPIA_A = [] 
+COPIA_OCULTA_A = ["pkingkee@utec.edu.pe"]
 
-# --- PLANTILLA HTML FINAL CON IMÁGENES RESPONSIVE (DESKTOP/MOBILE) ---
+# --- PLANTILLA HTML ACTUALIZADA ---
+# --- PLANTILLA HTML FINAL CON TODOS LOS CAMBIOS ---
 def crear_plantilla_html(nombre_destinatario):
-    # ¡IMPORTANTE! Reemplaza los '#' con tus enlaces reales.
-    link_bildin = "#"
-    link_talentum = "#"
-    link_domus_ai = "#"
-    link_quix = "#"
-    link_vera = "#"
-    link_nos = "#"
-    link_virtual_demo_week = "#"
+    # Enlaces actualizados
+    link_pitch_domus = "https://www.youtube.com/watch?v=wMrrHkjcowk"
+    link_reunion_founders = "https://calendly.com/domus-ai/demo?back=1&month=2025-08"
+    # El link del banner y del texto apuntan al mismo sitio para consistencia
+    link_demo_day = "https://eventos.utec.edu.pe/DemoDay"
 
     html = f"""
     <!DOCTYPE html>
     <html lang="es">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>¡Ya formas parte de la Virtual Demo Week de UTEC Ventures!</title>
+        <meta name="viewport" content="width=device-width, initial-scale-1.0">
+        <title>Conoce DomusAI</title>
         <style>
             /* --- ESTILOS PARA INTERCAMBIO DE IMÁGENES --- */
-            
-            /* Ocultar el banner móvil por defecto */
             .mobile-banner {{
                 display: none;
                 max-height: 0;
                 overflow: hidden;
             }}
-
-            /* Media Query: Si la pantalla es de 600px o menos */
             @media screen and (max-width: 600px) {{
-                /* Ocultar el banner de escritorio */
-                .desktop-banner {{
-                    display: none !important;
-                }}
-                /* Mostrar el banner de móvil */
+                .desktop-banner {{ display: none !important; }}
                 .mobile-banner {{
                     display: block !important;
                     max-height: none !important;
@@ -68,18 +60,15 @@ def crear_plantilla_html(nombre_destinatario):
                         <!-- SECCIÓN DEL BANNER RESPONSIVE -->
                         <tr>
                             <td align="center">
-                                <!-- Banner de Escritorio (Visible por defecto) -->
                                 <div class="desktop-banner" style="margin: 0; padding: 0;">
-                                    <a href="{link_virtual_demo_week}" target="_blank">
-                                        <img src="cid:banner-desktop" alt="UTEC Ventures - Virtual Demo Week" width="600" style="display: block; width: 100%; max-width: 600px; height: auto; border-radius: 8px 8px 0 0;">
+                                    <a href="{link_demo_day}" target="_blank">
+                                        <img src="cid:banner-desktop" alt="UTEC Ventures Demo Day" width="600" style="display: block; width: 100%; max-width: 600px; height: auto; border-radius: 8px 8px 0 0;">
                                     </a>
                                 </div>
-
-                                <!-- Banner de Móvil (Oculto por defecto y oculto para Outlook) -->
                                 <!--[if !mso]><!-->
                                 <div class="mobile-banner" style="display:none;max-height:0;overflow:hidden;">
-                                    <a href="{link_virtual_demo_week}" target="_blank">
-                                        <img src="cid:banner-mobile" alt="UTEC Ventures - Virtual Demo Week" width="100%" style="display: block; width: 100%; max-width: 100%; height: auto; border-radius: 8px 8px 0 0;">
+                                    <a href="{link_demo_day}" target="_blank">
+                                        <img src="cid:banner-mobile" alt="UTEC Ventures Demo Day" width="100%" style="display: block; width: 100%; max-width: 100%; height: auto; border-radius: 8px 8px 0 0;">
                                     </a>
                                 </div>
                                 <!--<![endif]-->
@@ -89,48 +78,28 @@ def crear_plantilla_html(nombre_destinatario):
                         <!-- SECCIÓN DEL CONTENIDO PRINCIPAL -->
                         <tr>
                             <td style="padding: 30px 30px 20px 30px; color: #333333; line-height: 1.6;">
-                                <p style="margin: 0 0 15px 0;">Hola {nombre_destinatario},</p>
-                                <p style="margin: 0 0 15px 0;">Del <strong>25 al 29 de agosto</strong> podrás entrar a nuestra plataforma para conocer a la nueva generación de startups en LatAm, explorar sus negocios y agendar reuniones uno a uno con los <strong>founders</strong>.</p>
-                                <p style="margin: 0 0 25px 0;">Aquí un adelanto de lo que encontrarás:</p>
+                                <p style="margin: 0 0 15px 0;">Hola <strong>{nombre_destinatario}</strong>,</p>
+                                <p style="margin: 0 0 15px 0;">¿Te imaginas un edificio que se gestione solo?</p>
+                                <p style="margin: 0 0 25px 0;">En UTEC Ventures seguimos apostando por startups con alto potencial. Hoy queremos presentarte a <strong>DomusAI</strong>, parte de nuestra 14G.</p>
+                                <p style="margin: 0 0 25px 0;">
+                                    <strong>DomusAI</strong> automatiza la facturación, el mantenimiento y la atención a residentes para los administradores de propiedades, mediante agentes de IA en WhatsApp y llamadas telefónicas. Su plataforma ayuda a los equipos a reducir carga operativa, mejorar el flujo de caja y brindar servicio inmediato (sin necesidad de contratar más personal ni capacitarlo).
+                                </p>
                                 
-                                <h2 style="color: #0089B1; margin: 0 0 10px 0;">Batch 14G – nuestras nuevas inversiones</h2>
                                 <ul style="margin: 0 0 20px 0; padding-left: 20px; list-style-position: outside;">
-                                    <li style="margin-bottom: 10px;">¿Quieres optimizar costos en obra con BIM + IA? Explora <a href="{link_bildin}" style="color: #330072; text-decoration: underline;"><strong>Bildin</strong></a>.</li>
-                                    <li style="margin-bottom: 10px;">¿Buscas un recruiter de IA que trabaje 24/7? Descubre <a href="{link_talentum}" style="color: #330072; text-decoration: underline;"><strong>Talentum</strong></a>.</li>
-                                    <li style="margin-bottom: 10px;">¿Te imaginas un edificio que se gestione solo? Conoce <a href="{link_domus_ai}" style="color: #330072; text-decoration: underline;"><strong>Domus AI</strong></a>.</li>
-                                    <li style="margin-bottom: 10px;">¿Necesitas entrenamientos corporativos listos en 24h por WhatsApp? Revisa <a href="{link_quix}" style="color: #330072; text-decoration: underline;"><strong>Quix</strong></a>.</li>
+                                    <li style="margin-bottom: 10px;">¿Quieres ver cómo <strong>DomusAI</strong> está transformando la gestión inmobiliaria? Mira aquí su <a href="{link_pitch_domus}" target="_blank" style="color: #330072; text-decoration: underline;"><strong>pitch</strong></a>.</li>
+                                    <li style="margin-bottom: 10px;">¿Te interesa conversar directamente con los founders? Agenda una reunión <a href="{link_reunion_founders}" target="_blank" style="color: #330072; text-decoration: underline;"><strong>aquí</strong></a>.</li>
+                                    <li style="margin-bottom: 10px;">¿Quieres conocer más startups de nuestra 14G? <a href="{link_demo_day}" target="_blank" style="color: #330072; text-decoration: underline;"><strong>Explora la 14G completa</strong></a>.</li>
                                 </ul>
-                                
-                                <h2 style="color: #0089B1; margin: 0 0 10px 0;">Portafolio en crecimiento</h2>
-                                <ul style="margin: 0 0 25px 0; padding-left: 20px; list-style-position: outside;">
-                                    <li style="margin-bottom: 10px;">¿Quieres ver cómo se aceleran las decisiones de crédito 100x más rápido? Mira <a href="{link_vera}" style="color: #330072; text-decoration: underline;"><strong>VERA (Batch 13G)</strong></a>.</li>
-                                    <li style="margin-bottom: 10px;">¿Te interesa cómo convertir finanzas informales en data crediticia trazable en zonas rurales? Aprende más de <a href="{link_nos}" style="color: #330072; text-decoration: underline;"><strong>NOS</strong></a>, startup del <strong>UV Lab</strong>.</li>
-                                </ul>
-                                
-                                <p style="margin: 0 0 20px 0;">Ya puedes explorarlo todo desde un solo lugar. Accede aquí a la Virtual Demo Week</p>
-                                
-                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                    <tr>
-                                        <td align="center">
-                                            <a href="{link_virtual_demo_week}" style="background-color: #FF2A00; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
-                                                Acceder a la Plataforma
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </table>
+
+                                <p style="margin: 0 0 20px 0;">Estamos convencidos del potencial de <strong>DomusAI</strong> para convertirse en el sistema operativo de edificios impulsado por IA y te invitamos a conocerla más de cerca.</p>
                             </td>
                         </tr>
                         
                          <tr>
                            <td style="padding: 0px 30px 30px 30px; font-family: Arial, sans-serif; color: #333333; line-height: 1.6;">
-                                <p style="margin: 20px 0 0 0;">El equipo de UTEC Ventures</p>
+                                <p style="margin: 0 0 0 0;">Saludos,</p>
+                                <p style="margin: 0;">Equipo de UTEC Ventures</p>
                            </td>
-                        </tr>
-                        
-                        <tr>
-                            <td align="center" style="padding: 20px; background-color: #f0f0f0; color: #555555; font-size: 12px; border-radius: 0 0 8px 8px;">
-                                &copy; {pd.Timestamp.now().year} UTEC Ventures. Todos los derechos reservados.
-                            </td>
                         </tr>
                     </table>
                 </td>
@@ -162,39 +131,35 @@ def main():
             mensaje["From"] = TU_CORREO
             mensaje["To"] = correo_destino
             
+            if COPIA_A:
+                mensaje["Cc"] = ", ".join(COPIA_A)
+
             cuerpo_html_para_email = crear_plantilla_html(nombre)
             parte_html = MIMEText(cuerpo_html_para_email, "html")
             mensaje.attach(parte_html)
             
             # --- ADJUNTAR AMBOS BANNERS ---
-            
-            # 1. Adjuntar Banner de Escritorio
-            ruta_banner_desktop = os.path.join('images', 'banner1.jpg')
             try:
-                with open(ruta_banner_desktop, 'rb') as f:
+                with open(os.path.join('images', 'banner1.jpg'), 'rb') as f:
                     parte_banner_desktop = MIMEImage(f.read())
                 parte_banner_desktop.add_header('Content-ID', '<banner-desktop>')
                 mensaje.attach(parte_banner_desktop)
             except FileNotFoundError:
-                print(f"❌ ADVERTENCIA: No se encontró '{ruta_banner_desktop}'.")
+                print("❌ ADVERTENCIA: No se encontró 'images/banner1.jpg'. El banner de escritorio no se adjuntará.")
 
-            # 2. Adjuntar Banner de Móvil
-            ruta_banner_mobile = os.path.join('images', 'banner2.jpg')
             try:
-                with open(ruta_banner_mobile, 'rb') as f:
+                with open(os.path.join('images', 'banner2.jpg'), 'rb') as f:
                     parte_banner_mobile = MIMEImage(f.read())
                 parte_banner_mobile.add_header('Content-ID', '<banner-mobile>')
                 mensaje.attach(parte_banner_mobile)
             except FileNotFoundError:
-                print(f"❌ ADVERTENCIA: No se encontró '{ruta_banner_mobile}'.")
+                print("❌ ADVERTENCIA: No se encontró 'images/banner2.jpg'. El banner móvil no se adjuntará.")
             
             # --- PREPARAR LA VISTA PREVIA ---
-            ruta_desktop_web = ruta_banner_desktop.replace('\\', '/')
-            ruta_mobile_web = ruta_banner_mobile.replace('\\', '/')
             cuerpo_html_para_preview = cuerpo_html_para_email.replace(
-                'cid:banner-desktop', ruta_desktop_web
+                'cid:banner-desktop', os.path.join('images', 'banner1.jpg').replace('\\', '/')
             ).replace(
-                'cid:banner-mobile', ruta_mobile_web
+                'cid:banner-mobile', os.path.join('images', 'banner2.jpg').replace('\\', '/')
             )
             
             filepath = "vista_previa_temporal.html"
@@ -204,11 +169,15 @@ def main():
             print("👀 Abriendo vista previa en tu navegador...")
             webbrowser.open("file://" + os.path.realpath(filepath))
             time.sleep(1)
-
-            confirmacion = input(f"   ❓ ¿Enviar este correo a {nombre}? (s/n): ").lower()
+            
+            print(f"   - Con Copia (CC) a: {', '.join(COPIA_A) if COPIA_A else 'Ninguno'}")
+            print(f"   - Con Copia Oculta (CCO) a: {', '.join(COPIA_OCULTA_A) if COPIA_OCULTA_A else 'Ninguno'}")
+            
+            confirmacion = input(f"   ❓ ¿Enviar este correo a {nombre}, su correo es {correo_destino}? (s/n): ").lower()
 
             if confirmacion == 's':
-                servidor.sendmail(TU_CORREO, correo_destino, mensaje.as_string())
+                destinatarios_completos = [correo_destino] + COPIA_A + COPIA_OCULTA_A
+                servidor.sendmail(TU_CORREO, destinatarios_completos, mensaje.as_string())
                 print(f"   🚀 ¡Correo enviado exitosamente!")
             else:
                 print(f"   ❌ Envío cancelado por el usuario.")
